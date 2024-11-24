@@ -9,10 +9,6 @@ class Lotto(
     @Convert(converter = IntListConverter::class)
     val numbers: List<Int>,
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_id", nullable = false)
-    val ticket: Ticket,
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long = 0,
@@ -20,6 +16,7 @@ class Lotto(
 
     init {
         require(numbers.size == 6) { "로또 번호는 6개 이어야 합니다" }
+        require(numbers.distinct().size == numbers.size) { "로또 번호는 중복되어서는 안됩니다" }
     }
 
     @Converter

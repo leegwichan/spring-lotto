@@ -10,6 +10,7 @@ spring:
         highlight_sql: true
         jdbc:
           batch_size: 1000
+    open-in-view: false
 
   datasource:
     driver-class-name: org.h2.Driver
