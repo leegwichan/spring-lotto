@@ -1,6 +1,6 @@
-package lotto.dto
+package dto
 
-import lotto.domain.Lotto
+import domain.Lotto
 
 data class TicketRequest(
     val numbers: List<List<Int>>
@@ -13,7 +13,7 @@ data class TicketResponse(
 
     companion object {
         fun of(id: Long, lotties: List<Lotto>): TicketResponse {
-            return TicketResponse(id, lotties.map { it.numbers })
+            return TicketResponse(id, lotties.map { it.numbers.values })
         }
     }
 }

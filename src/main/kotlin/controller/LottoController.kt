@@ -1,10 +1,10 @@
-package lotto.controller
+package controller
 
 import jakarta.transaction.Transactional
-import lotto.domain.Ticket
-import lotto.dto.TicketRequest
-import lotto.dto.TicketResponse
-import lotto.repository.TicketRepository
+import domain.Ticket
+import dto.TicketRequest
+import dto.TicketResponse
+import repository.TicketRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
