@@ -3,9 +3,9 @@ package lotto.controller
 import jakarta.transaction.Transactional
 import lotto.domain.Ticket
 import lotto.domain.WinningNumbers
-import lotto.domain.WinningRank
 import lotto.dto.TicketRequest
 import lotto.dto.TicketResponse
+import lotto.dto.WinningResultResponse
 import lotto.repository.TicketRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -37,9 +37,10 @@ class LottoController(
         @PathVariable("id") id: Long,
         @RequestParam winningNumber: List<Int>,
         @RequestParam bonusNumber: Int
-    ): Map<WinningRank, Int> {
+    ): WinningResultResponse {
         val winningNumbers = WinningNumbers(winningNumber, bonusNumber)
         val ticket = ticketRepository.findById(id).orElseThrow()
-        return winningNumbers.findRank(ticket)
+        val result = winningNumbers.findRank(ticket)
+        return WinningResultResponse(result)
     }
 }

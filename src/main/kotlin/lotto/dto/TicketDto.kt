@@ -1,6 +1,7 @@
 package lotto.dto
 
 import lotto.domain.Lotto
+import lotto.domain.WinningRank
 
 data class TicketRequest(
     val numbers: List<List<Int>>
@@ -17,3 +18,7 @@ data class TicketResponse(
         }
     }
 }
+
+data class WinningResultResponse(
+    val result: Map<WinningRank, Int>
+)
