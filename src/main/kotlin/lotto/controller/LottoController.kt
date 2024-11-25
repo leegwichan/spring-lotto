@@ -2,6 +2,8 @@ package lotto.controller
 
 import jakarta.transaction.Transactional
 import lotto.domain.Ticket
+import lotto.domain.WinningNumbers
+import lotto.domain.WinningRank
 import lotto.dto.TicketRequest
 import lotto.dto.TicketResponse
 import lotto.repository.TicketRepository
@@ -30,7 +32,14 @@ class LottoController(
     }
 
     @GetMapping("/api/count/{id}")
-    fun countWinningLotto(@PathVariable("id") id: Int): Int {
-        return 0
+    @Transactional
+    fun countWinningLotto(
+        @PathVariable("id") id: Long,
+        @RequestParam winningNumber: List<Int>,
+        @RequestParam bonusNumber: Int
+    ): Map<WinningRank, Int> {
+        val winningNumbers = WinningNumbers(winningNumber, bonusNumber)
+        val ticket = ticketRepository.findById(id).orElseThrow()
+        return winningNumbers.findRank(ticket)
     }
 }

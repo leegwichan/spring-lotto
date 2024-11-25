@@ -10,6 +10,10 @@ class Numbers(private val numbers: List<Number>) {
         require(numbers.distinct().size == numbers.size) { "로또 번호는 중복되어서는 안됩니다" }
     }
 
+    fun countMatchingNumbers(numbers: Numbers): Int = this.numbers.intersect(numbers.numbers).size
+
+    fun isContained(number: Number): Boolean = this.numbers.contains(number)
+
     companion object {
 
         private const val NUMBER_SIZE = 6
