@@ -1,6 +1,6 @@
-package repository
+package lotto.repository
 
-import domain.Ticket
+import lotto.domain.Ticket
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface TicketRepository : JpaRepository<Ticket, Long>

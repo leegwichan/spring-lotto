@@ -1,10 +1,11 @@
-package controller
+package lotto.controller
 
 import jakarta.transaction.Transactional
-import domain.Ticket
-import dto.TicketRequest
-import dto.TicketResponse
-import repository.TicketRepository
+import lotto.domain.Ticket
+import lotto.dto.TicketRequest
+import lotto.dto.TicketResponse
+import lotto.repository.TicketRepository
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -20,6 +21,7 @@ class LottoController(
     }
 
     @PostMapping("/api/tickets")
+    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     fun postTicket(@RequestBody request: TicketRequest): TicketResponse {
         val ticket = Ticket(request.numbers)
