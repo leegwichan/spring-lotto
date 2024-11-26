@@ -7,7 +7,6 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-
 class WinningRankTest : StringSpec({
 
     table(
