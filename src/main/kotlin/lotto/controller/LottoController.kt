@@ -1,6 +1,5 @@
 package lotto.controller
 
-import jakarta.transaction.Transactional
 import lotto.domain.Ticket
 import lotto.domain.WinningNumbers
 import lotto.dto.TicketRequest
@@ -8,6 +7,7 @@ import lotto.dto.TicketResponse
 import lotto.dto.WinningResultResponse
 import lotto.repository.TicketRepository
 import org.springframework.http.HttpStatus
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,7 +16,7 @@ class LottoController(
 ) {
 
     @GetMapping("/api/tickets/{id}")
-    @Transactional
+    @Transactional(readOnly = true)
     fun getTicket(@PathVariable("id") id: Long): TicketResponse {
         val ticket = ticketRepository.findById(id).orElseThrow()
         return TicketResponse.of(id, ticket.lottos)
@@ -32,7 +32,7 @@ class LottoController(
     }
 
     @GetMapping("/api/count/{id}")
-    @Transactional
+    @Transactional(readOnly = true)
     fun countWinningLotto(
         @PathVariable("id") id: Long,
         @RequestParam winningNumber: List<Int>,
