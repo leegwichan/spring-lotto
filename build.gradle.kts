@@ -45,8 +45,6 @@ dependencies {
 
     testImplementation("io.rest-assured:rest-assured:5.5.0")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
-    //testImplementation("io.rest-assured:spring-mock-mvc:5.5.0")
-    //testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extension:5.5.0")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
@@ -80,7 +78,7 @@ tasks.withType<GenerateSwaggerUI> {
 
 tasks.withType<BootJar> {
     dependsOn("openapi3")
-//    dependsOn("postman")
+    dependsOn("postman")
 }
 
 openapi3 {
@@ -92,8 +90,8 @@ openapi3 {
     outputDirectory = "build/resources/main/static/docs"
 }
 
-//postman {
-//    title = "My API"
-//    version = "0.1.0"
-//    baseUrl = "https://localhost:8080"
-//}
+postman {
+    title = "My API"
+    version = "0.1.0"
+    baseUrl = "https://localhost:8080"
+}

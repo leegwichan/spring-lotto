@@ -8,11 +8,9 @@ import org.springframework.test.context.TestExecutionListeners
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestExecutionListeners(
     value = [DatabaseCleanerExecutionListener::class, RestAssuredExtensionListener::class],
-    mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
+    mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS,
 )
 abstract class BaseControllerTest {
-
     @Autowired
     protected lateinit var ticketRepository: TicketRepository
 }
-

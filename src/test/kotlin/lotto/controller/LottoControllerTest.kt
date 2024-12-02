@@ -15,7 +15,6 @@ import lotto.dto.WinningResultResponse
 import org.junit.jupiter.api.Test
 
 class LottoControllerTest : BaseControllerTest() {
-
     companion object {
         private val NUMBERS = listOf(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12))
     }
@@ -45,7 +44,7 @@ class LottoControllerTest : BaseControllerTest() {
 
         val response =
             When {
-                get("/api/tickets/${ticket.id}")
+                get("/api/tickets/{id}", ticket.id)
             } Then {
                 statusCode(200)
             } Extract {
@@ -67,13 +66,21 @@ class LottoControllerTest : BaseControllerTest() {
                 queryParam("winningNumber", winningNumber)
                 queryParam("bonusNumber", bonusNumber)
             } When {
-                get("/api/count/${ticket.id}")
+                get("/api/count/{id}", ticket.id)
             } Then {
                 statusCode(200)
             } Extract {
                 `as`(WinningResultResponse::class.java)
             }
 
-        response.result shouldBe mapOf(WinningRank.SECOND to 1, WinningRank.NOTHING to 1)
+        response.result shouldBe
+            mapOf(
+                WinningRank.FIRST to 0,
+                WinningRank.SECOND to 1,
+                WinningRank.THIRD to 0,
+                WinningRank.FOURTH to 0,
+                WinningRank.FIFTH to 0,
+                WinningRank.NOTHING to 1,
+            )
     }
 }

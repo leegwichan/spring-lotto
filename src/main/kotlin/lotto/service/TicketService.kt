@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TicketService(private val ticketRepository: TicketRepository) {
-
     @Transactional(readOnly = true)
     fun getTicket(id: Long): TicketResponse {
         val ticket = ticketRepository.findById(id).orElseThrow()
@@ -26,10 +25,14 @@ class TicketService(private val ticketRepository: TicketRepository) {
     }
 
     @Transactional(readOnly = true)
-    fun getWinningResult(id: Long, winningNumber: List<Int>, bonusNumber: Int): WinningResultResponse {
+    fun getWinningResult(
+        id: Long,
+        winningNumber: List<Int>,
+        bonusNumber: Int,
+    ): WinningResultResponse {
         val winningNumbers = WinningNumbers(winningNumber, bonusNumber)
         val ticket = ticketRepository.findById(id).orElseThrow()
         val result = winningNumbers.findRank(ticket)
-        return WinningResultResponse(result)
+        return WinningResultResponse.from(result)
     }
 }

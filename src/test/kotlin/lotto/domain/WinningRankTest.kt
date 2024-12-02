@@ -19,7 +19,7 @@ class WinningRankTest : StringSpec({
         row(3, true, WinningRank.FIFTH),
         row(3, false, WinningRank.FIFTH),
         row(2, true, WinningRank.NOTHING),
-        row(0, false, WinningRank.NOTHING)
+        row(0, false, WinningRank.NOTHING),
     ).forAll { matchingCount, isBonusMatch, expected ->
 
         "당첨 번호가 $matchingCount 개 일치하고 보너스 번호가 $isBonusMatch 이면 $expected 순위이다" {

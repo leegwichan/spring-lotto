@@ -7,7 +7,6 @@ import org.springframework.test.context.support.AbstractTestExecutionListener
 import org.springframework.transaction.support.TransactionTemplate
 
 class DatabaseCleanerExecutionListener : AbstractTestExecutionListener() {
-
     override fun beforeTestMethod(testContext: TestContext) {
         cleanupDatabase(testContext.applicationContext)
     }
@@ -38,12 +37,14 @@ class DatabaseCleanerExecutionListener : AbstractTestExecutionListener() {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun findTableNames(entityManager: EntityManager): List<String> {
-        val query = """
+        val query =
+            """
             SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_SCHEMA = 'PUBLIC'
-        """.trimIndent()
+            """.trimIndent()
         return entityManager.createNativeQuery(query).resultList as List<String>
     }
 }

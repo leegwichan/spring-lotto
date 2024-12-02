@@ -1,7 +1,6 @@
 package lotto.domain
 
 class Numbers(private val numbers: List<Number>) {
-
     val values: List<Int>
         get() = numbers.map { it.value }
 
@@ -26,7 +25,6 @@ class Numbers(private val numbers: List<Number>) {
     }
 
     companion object {
-
         private const val NUMBER_SIZE = 6
 
         fun from(integers: List<Int>): Numbers {

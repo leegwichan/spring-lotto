@@ -1,7 +1,6 @@
 package lotto.domain
 
 enum class WinningRank(private val needMatchingCount: Int, private val needBonusMatch: Boolean) {
-
     FIRST(6, false),
     SECOND(5, true),
     THIRD(5, false),
@@ -10,7 +9,10 @@ enum class WinningRank(private val needMatchingCount: Int, private val needBonus
     NOTHING(0, false),
     ;
 
-    private fun isSatisfyRank(matchingCount: Int, isBonusMatch: Boolean): Boolean {
+    private fun isSatisfyRank(
+        matchingCount: Int,
+        isBonusMatch: Boolean,
+    ): Boolean {
         return isSatisfyMatchingCount(matchingCount) && isSatisfyBonusMatch(isBonusMatch)
     }
 
@@ -23,9 +25,12 @@ enum class WinningRank(private val needMatchingCount: Int, private val needBonus
     }
 
     companion object {
-        private val ORDER_OF_RANK = listOf(FIRST, SECOND, THIRD, FOURTH, FIFTH, NOTHING)
+        val ORDER_OF_RANK = listOf(FIRST, SECOND, THIRD, FOURTH, FIFTH, NOTHING)
 
-        fun findRank(matchingCount: Int, isBonusMatch: Boolean) : WinningRank {
+        fun findRank(
+            matchingCount: Int,
+            isBonusMatch: Boolean,
+        ): WinningRank {
             return ORDER_OF_RANK.first { it.isSatisfyRank(matchingCount, isBonusMatch) }
         }
     }
