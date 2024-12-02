@@ -1,4 +1,4 @@
-package lotto.controller
+package lotto
 
 import io.restassured.RestAssured
 import io.restassured.filter.log.ErrorLoggingFilter
@@ -15,7 +15,7 @@ class RestAssuredExtensionListener : AbstractTestExecutionListener() {
     }
 
     override fun beforeTestMethod(testContext: TestContext) {
-        var port = testContext.applicationContext
+        val port = testContext.applicationContext
             .environment.getProperty("local.server.port")?.toIntOrNull()
             ?: throw IllegalStateException("can't find local server port")
 

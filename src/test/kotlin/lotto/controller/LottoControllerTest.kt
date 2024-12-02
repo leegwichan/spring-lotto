@@ -6,11 +6,13 @@ import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
+import lotto.BaseControllerTest
 import lotto.domain.Ticket
 import lotto.domain.WinningRank
 import lotto.dto.TicketRequest
 import lotto.dto.TicketResponse
 import lotto.dto.WinningResultResponse
+import org.junit.jupiter.api.Test
 
 class LottoControllerTest : BaseControllerTest() {
 
@@ -20,9 +22,9 @@ class LottoControllerTest : BaseControllerTest() {
 
     @Test
     fun `로또 티켓을 생성할 수 있다`() {
-        var request = TicketRequest(NUMBERS)
+        val request = TicketRequest(NUMBERS)
 
-        var response =
+        val response =
             Given {
                 contentType(ContentType.JSON)
                 body(request)
@@ -41,7 +43,7 @@ class LottoControllerTest : BaseControllerTest() {
     fun `로또 티켓을 조회할 수 있다`() {
         val ticket = ticketRepository.save(Ticket(NUMBERS))
 
-        var response =
+        val response =
             When {
                 get("/api/tickets/${ticket.id}")
             } Then {
