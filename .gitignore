@@ -44,3 +44,4 @@ out/
 
 ### Spring Rest Docs ###
 /src/main/resources/docs/
+/src/main/resources/static/docs/openapi3.yaml

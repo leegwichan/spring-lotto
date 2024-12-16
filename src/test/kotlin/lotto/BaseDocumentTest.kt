@@ -32,11 +32,17 @@ abstract class BaseDocumentTest {
                         .operationPreprocessors()
                         .withRequestDefaults(
                             Preprocessors.prettyPrint(),
-                            Preprocessors.modifyHeaders().remove(HttpHeaders.CONTENT_LENGTH),
+                            Preprocessors.modifyHeaders()
+                                .remove(HttpHeaders.HOST)
+                                .remove(HttpHeaders.CONTENT_LENGTH),
                         )
                         .withResponseDefaults(
                             Preprocessors.prettyPrint(),
-                            Preprocessors.modifyHeaders().remove(HttpHeaders.CONTENT_LENGTH),
+                            Preprocessors.modifyHeaders()
+                                .remove(HttpHeaders.TRANSFER_ENCODING)
+                                .remove(HttpHeaders.DATE)
+                                .remove(HttpHeaders.CONNECTION)
+                                .remove(HttpHeaders.CONTENT_LENGTH),
                         ),
                 )
                 .build()

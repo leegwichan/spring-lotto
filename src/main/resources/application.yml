@@ -24,3 +24,4 @@ spring:
 springdoc:
   swagger-ui:
     path: /docs/swagger
+    url: /docs/openapi3.yaml

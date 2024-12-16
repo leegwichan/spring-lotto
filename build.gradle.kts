@@ -9,7 +9,7 @@ plugins {
     kotlin("plugin.jpa") version "1.9.25"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 
-    id("com.epages.restdocs-api-spec") version "0.18.2"
+    id("com.epages.restdocs-api-spec") version "0.18.4"
     id("org.hidetake.swagger.generator") version "2.18.2"
 }
 
@@ -37,16 +37,21 @@ dependencies {
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
+    // Kotest (Unin Test)
     testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
     testImplementation("io.kotest:kotest-assertions-core:5.7.2")
 
+    // Spring Boot Test (Integration Test)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
 
+    // Rest Assured (Integration Test)
     testImplementation("io.rest-assured:rest-assured:5.5.0")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
 
+    // Mock MVC (Documentation Test)
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.18.4")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
@@ -69,10 +74,10 @@ tasks.withType<Test> {
 tasks.withType<GenerateSwaggerUI> {
     dependsOn("openapi3")
 
-    delete("src/main/resources/static/docs")
+    delete("src/main/resources/static/docs/")
     copy {
-        from("build/resources/main/static/docs")
-        into("src/main/resources/static/docs")
+        from("build/resources/main/static/docs/")
+        into("src/main/resources/static/docs/")
     }
 }
 
@@ -86,12 +91,6 @@ openapi3 {
     title = "로또 당첨 확인 서비스"
     description = "구매한 로또를 입력하고 당첨을 확인하는 서비스"
     version = "0.0.1"
-    format = "json"
+    format = "yaml"
     outputDirectory = "build/resources/main/static/docs"
-}
-
-postman {
-    title = "My API"
-    version = "0.1.0"
-    baseUrl = "https://localhost:8080"
 }
