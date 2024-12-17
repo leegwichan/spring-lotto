@@ -112,8 +112,8 @@ class LottoDocumentTest : BaseDocumentTest() {
                     parameterWithName("id").description("티켓 ID"),
                 )
                 .queryParameters(
-                    parameterWithName("winningNumber").description("당첨 번호"),
-                    parameterWithName("bonusNumber").description("보너스 번호"),
+                    parameterWithName("winningNumber").description("당첨 번호 (숫자 1개)"),
+                    parameterWithName("bonusNumber").description("보너스 번호 (숫자 6개를 ','로 구분)"),
                 )
                 .responseFields(
                     fieldWithPath("result").type(OBJECT).description("티켓 ID"),
