@@ -1,8 +1,8 @@
 package lotto
 
+import lotto.helper.document.DocumentBuilder
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.http.HttpHeaders
 import org.springframework.restdocs.RestDocumentationContextProvider
 import org.springframework.restdocs.RestDocumentationExtension
@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
 @ExtendWith(RestDocumentationExtension::class)
-@AutoConfigureRestDocs
 abstract class BaseDocumentTest {
     protected lateinit var mockMvc: MockMvc
 
@@ -46,5 +45,9 @@ abstract class BaseDocumentTest {
                         ),
                 )
                 .build()
+    }
+
+    protected fun documentBuilder(identifier: String): DocumentBuilder {
+        return DocumentBuilder(identifier)
     }
 }

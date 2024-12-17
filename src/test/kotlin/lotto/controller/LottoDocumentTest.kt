@@ -1,7 +1,5 @@
 package lotto.controller
 
-import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document
-import com.epages.restdocs.apispec.ResourceSnippetParameters
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
@@ -36,22 +34,20 @@ class LottoDocumentTest : BaseDocumentTest() {
         val request = TicketRequest(NUMBERS)
         val response = TicketResponse(1L, NUMBERS)
         val document =
-            document(
-                "ticket/create-ticket",
-                ResourceSnippetParameters.builder()
-                    .description("로또 티켓 생성")
-                    .requestFields(
-                        fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                        fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                        fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
-                    )
-                    .responseFields(
-                        fieldWithPath("id").type(NUMBER).description("티켓 ID"),
-                        fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                        fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                        fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
-                    ),
-            )
+            documentBuilder("ticket/create-ticket")
+                .description("로또 티켓 생성")
+                .requestFields(
+                    fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                )
+                .responseFields(
+                    fieldWithPath("id").type(NUMBER).description("티켓 ID"),
+                    fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                )
+                .build()
 
         every { ticketService.createTicket(request) } returns response
 
@@ -70,20 +66,18 @@ class LottoDocumentTest : BaseDocumentTest() {
         val ticketId = 1L
         val response = TicketResponse(1L, NUMBERS)
         val document =
-            document(
-                "ticket/find-ticket",
-                ResourceSnippetParameters.builder()
-                    .description("로또 티켓 조회")
-                    .pathParameters(
-                        parameterWithName("id").description("티켓 ID"),
-                    )
-                    .responseFields(
-                        fieldWithPath("id").type(NUMBER).description("티켓 ID"),
-                        fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                        fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                        fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
-                    ),
-            )
+            documentBuilder("ticket/find-ticket")
+                .description("로또 티켓 조회")
+                .pathParameters(
+                    parameterWithName("id").description("티켓 ID"),
+                )
+                .responseFields(
+                    fieldWithPath("id").type(NUMBER).description("티켓 ID"),
+                    fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                )
+                .build()
 
         every { ticketService.getTicket(ticketId) } returns response
 
@@ -112,27 +106,25 @@ class LottoDocumentTest : BaseDocumentTest() {
                 ),
             )
         val document =
-            document(
-                "ticket/find-count",
-                ResourceSnippetParameters.builder()
-                    .description("로또 티켓 당첨 결과 조회")
-                    .pathParameters(
-                        parameterWithName("id").description("티켓 ID"),
-                    )
-                    .queryParameters(
-                        parameterWithName("winningNumber").description("당첨 번호"),
-                        parameterWithName("bonusNumber").description("보너스 번호"),
-                    )
-                    .responseFields(
-                        fieldWithPath("result").type(OBJECT).description("티켓 ID"),
-                        fieldWithPath("result.FIRST").type(NUMBER).description("1등 당첨 개수"),
-                        fieldWithPath("result.SECOND").type(NUMBER).description("2등 당첨 개수"),
-                        fieldWithPath("result.THIRD").type(NUMBER).description("3등 당첨 개수"),
-                        fieldWithPath("result.FOURTH").type(NUMBER).description("4등 당첨 개수"),
-                        fieldWithPath("result.FIFTH").type(NUMBER).description("5등 당첨 개수"),
-                        fieldWithPath("result.NOTHING").type(NUMBER).description("당첨 안된 개수"),
-                    ),
-            )
+            documentBuilder("ticket/find-count")
+                .description("로또 티켓 당첨 결과 조회")
+                .pathParameters(
+                    parameterWithName("id").description("티켓 ID"),
+                )
+                .queryParameters(
+                    parameterWithName("winningNumber").description("당첨 번호"),
+                    parameterWithName("bonusNumber").description("보너스 번호"),
+                )
+                .responseFields(
+                    fieldWithPath("result").type(OBJECT).description("티켓 ID"),
+                    fieldWithPath("result.FIRST").type(NUMBER).description("1등 당첨 개수"),
+                    fieldWithPath("result.SECOND").type(NUMBER).description("2등 당첨 개수"),
+                    fieldWithPath("result.THIRD").type(NUMBER).description("3등 당첨 개수"),
+                    fieldWithPath("result.FOURTH").type(NUMBER).description("4등 당첨 개수"),
+                    fieldWithPath("result.FIFTH").type(NUMBER).description("5등 당첨 개수"),
+                    fieldWithPath("result.NOTHING").type(NUMBER).description("당첨 안된 개수"),
+                )
+                .build()
 
         every { ticketService.getWinningResult(ticketId, any(), any()) } returns response
 

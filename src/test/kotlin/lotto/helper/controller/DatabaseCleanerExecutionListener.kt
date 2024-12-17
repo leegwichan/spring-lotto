@@ -1,4 +1,4 @@
-package lotto
+package lotto.helper.controller
 
 import jakarta.persistence.EntityManager
 import org.springframework.context.ApplicationContext

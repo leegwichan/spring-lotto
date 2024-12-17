@@ -49,9 +49,9 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.5.0")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
 
-    // Mock MVC (Documentation Test)
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    // (Documentation Test)
     testImplementation("com.epages:restdocs-api-spec-mockmvc:0.18.4")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
@@ -83,7 +83,6 @@ tasks.withType<GenerateSwaggerUI> {
 
 tasks.withType<BootJar> {
     dependsOn("openapi3")
-    dependsOn("postman")
 }
 
 openapi3 {

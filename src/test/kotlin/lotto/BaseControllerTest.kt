@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.helper.controller.DatabaseCleanerExecutionListener
+import lotto.helper.controller.RestAssuredExtensionListener
 import lotto.repository.TicketRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

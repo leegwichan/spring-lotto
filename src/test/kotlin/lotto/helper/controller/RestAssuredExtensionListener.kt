@@ -1,4 +1,4 @@
-package lotto
+package lotto.helper.controller
 
 import io.restassured.RestAssured
 import io.restassured.filter.log.ErrorLoggingFilter
