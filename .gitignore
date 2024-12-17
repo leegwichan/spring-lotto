@@ -42,6 +42,5 @@ out/
 ### Mac OS ###
 .DS_Store
 
-### Spring Rest Docs ###
-/src/main/resources/docs/
-/src/main/resources/static/docs/openapi3.yaml
+### Spring Documentation ###
+/src/main/resources/static/docs/

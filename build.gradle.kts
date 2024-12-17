@@ -9,7 +9,7 @@ plugins {
     kotlin("plugin.jpa") version "1.9.25"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 
-    id("com.epages.restdocs-api-spec") version "0.18.4"
+    id("com.epages.restdocs-api-spec") version "0.18.2"
     id("org.hidetake.swagger.generator") version "2.18.2"
 }
 
@@ -50,8 +50,8 @@ dependencies {
     testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
 
     // (Documentation Test)
-    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.18.4")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.18.2")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
