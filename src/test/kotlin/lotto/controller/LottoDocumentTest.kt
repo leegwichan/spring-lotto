@@ -38,14 +38,14 @@ class LottoDocumentTest : BaseDocumentTest() {
                 .description("로또 티켓 생성")
                 .requestFields(
                     fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들 (6개)"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("로또 숫자 (1~45)"),
                 )
                 .responseFields(
                     fieldWithPath("id").type(NUMBER).description("티켓 ID"),
                     fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들 (6개)"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("로또 숫자 (1~45)"),
                 )
                 .build()
 
@@ -74,8 +74,8 @@ class LottoDocumentTest : BaseDocumentTest() {
                 .responseFields(
                     fieldWithPath("id").type(NUMBER).description("티켓 ID"),
                     fieldWithPath("numbers").type(ARRAY).description("티켓 내 로또들"),
-                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들"),
-                    fieldWithPath("numbers[][]").type(ARRAY).description("숫자"),
+                    fieldWithPath("numbers[]").type(ARRAY).description("로또 숫자들 (6개)"),
+                    fieldWithPath("numbers[][]").type(ARRAY).description("로또 숫자 (1~45)"),
                 )
                 .build()
 
@@ -112,8 +112,8 @@ class LottoDocumentTest : BaseDocumentTest() {
                     parameterWithName("id").description("티켓 ID"),
                 )
                 .queryParameters(
-                    parameterWithName("winningNumber").description("당첨 번호 (숫자 1개)"),
-                    parameterWithName("bonusNumber").description("보너스 번호 (숫자 6개를 ','로 구분)"),
+                    parameterWithName("winningNumber").description("당첨 번호 (숫자 1개 / 1~45)"),
+                    parameterWithName("bonusNumber").description("보너스 번호 (숫자 6개를 ','로 구분 / 숫자 : 1~45)"),
                 )
                 .responseFields(
                     fieldWithPath("result").type(OBJECT).description("티켓 ID"),
@@ -122,7 +122,7 @@ class LottoDocumentTest : BaseDocumentTest() {
                     fieldWithPath("result.THIRD").type(NUMBER).description("3등 당첨 개수"),
                     fieldWithPath("result.FOURTH").type(NUMBER).description("4등 당첨 개수"),
                     fieldWithPath("result.FIFTH").type(NUMBER).description("5등 당첨 개수"),
-                    fieldWithPath("result.NOTHING").type(NUMBER).description("당첨 안된 개수"),
+                    fieldWithPath("result.NOTHING").type(NUMBER).description("당첨 안 된 개수"),
                 )
                 .build()
 
