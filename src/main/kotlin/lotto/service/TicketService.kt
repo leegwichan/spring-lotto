@@ -6,6 +6,7 @@ import lotto.dto.TicketRequest
 import lotto.dto.TicketResponse
 import lotto.dto.WinningResultResponse
 import lotto.repository.TicketRepository
+import lotto.repository.getById
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class TicketService(private val ticketRepository: TicketRepository) {
     @Transactional(readOnly = true)
     fun getTicket(id: Long): TicketResponse {
-        val ticket = ticketRepository.findById(id).orElseThrow()
+        val ticket = ticketRepository.getById(id)
         return TicketResponse.of(id, ticket.lottos)
     }
 
@@ -31,7 +32,7 @@ class TicketService(private val ticketRepository: TicketRepository) {
         bonusNumber: Int,
     ): WinningResultResponse {
         val winningNumbers = WinningNumbers(winningNumber, bonusNumber)
-        val ticket = ticketRepository.findById(id).orElseThrow()
+        val ticket = ticketRepository.getById(id)
         val result = winningNumbers.findRank(ticket)
         return WinningResultResponse.from(result)
     }
